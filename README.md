@@ -106,9 +106,9 @@ __Do not click__ on the link or a document that looks suspicious.
 __Don’t enable online services__ or __create online accounts__ just because of promotion. 
 
 
-Reference:
-[1]"NVD - CVE-2017-11882", Nvd.nist.gov, 2021. [Online]. Available: https://nvd.nist.gov/vuln/detail/CVE-2017-11882. [Accessed: 18- Mar- 2021].
-[2]Blogs.quickheal.com, 2021. [Online]. Available: https://blogs.quickheal.com/wp-content/uploads/2018/02/Fig3.png. [Accessed: 18- Mar- 2021].
-[3]C. Hardy, Stack Buffer Overflows - a primer on smashing the stack using CVE-2017-11882. 2021.
-[4]C. Hardy, CVE-2017-11882 - 3 ways to perform technical analysis, 1 easy way to protect. 2021.
+### Reference:  
+[1]"NVD - CVE-2017-11882", Nvd.nist.gov, 2021. [Online]. Available: https://nvd.nist.gov/vuln/detail/CVE-2017-11882. [Accessed: 18- Mar- 2021].  
+[2]Blogs.quickheal.com, 2021. [Online]. Available: https://blogs.quickheal.com/wp-content/uploads/2018/02/Fig3.png. [Accessed: 18- Mar- 2021].  
+[3]C. Hardy, Stack Buffer Overflows - a primer on smashing the stack using CVE-2017-11882. 2021.  
+[4]C. Hardy, CVE-2017-11882 - 3 ways to perform technical analysis, 1 easy way to protect. 2021.  
 [5]L. Treiber, "Microsoft's Manual Binary Patch For CVE-2017-11882 Meets 0patch", Blog.0patch.com, 2021. [Online]. Available: https://blog.0patch.com/2017/11/official-patch-for-cve-2017-11882-meets.html. [Accessed: 18- Mar- 2021].
