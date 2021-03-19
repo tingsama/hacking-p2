@@ -1,4 +1,5 @@
-# Microsoft Office Memory Corruption (CVE-2017-11882)
+# Microsoft Office Memory Corruption (CVE-2017-11882)  
+![Word Logo](https://github.com/tingsama/hacking-p2/blob/main/Word%20Logo.png)  
 
 ### Background
 * __Age__: 17 year old vulnerability
@@ -12,7 +13,8 @@
 * __CVSS__:
   * The Common Vulnerability Scoring System
   * The score is 7.8 (high)
-  * Really dangerous & should be fixed ASAP
+  * Really dangerous & should be fixed ASAP  
+![CVSS](https://github.com/tingsama/hacking-p2/blob/main/CVSS.png)  
 
 
 ### It always starts from the internet phishing...
@@ -38,13 +40,38 @@ It is a set of tools used for penetration testing of web applications. [referenc
 
 
 ### Steps after you click the malicious word file:
-1. Microsoft Word file load up
-2. Execute Equation Editor
-3. Hacker overflowed the font name registers inside Equation Editor
-4. Overflow message
-5. Redirect to new EIP address
-6. Winexe execute
-7. Download hacker’s malicious software
+1. Microsoft Word file load up  
+Here microsoft word will load up and read and compile the stuff inside.  
+![step 1](https://github.com/tingsama/hacking-p2/blob/main/step%201.png)  
+2. Execute Equation Editor  
+Everyone used the equation editor before, to create the nice look equations.  
+However, the equation editor is another individual program and Microsoft Word invokes its own process.  
+In this case, everything inside the equation editor can skip all Microsoft protection bubbles.  
+![step 2](https://github.com/tingsama/hacking-p2/blob/main/step%202.png)  
+3. Hacker overflowed the font name registers inside Equation Editor  
+Before overflow EAX save the length of font name which is 16 bytes (Hex:00000010).  
+And the detail inside the font name registers is “TIMES NEW ROMAN”.  
+![step 3-1](https://github.com/tingsama/hacking-p2/blob/main/step%203-1.png)  
+After overflow, EAX pointed to 0012F350 and overflowed all other registers.  
+On memory 004115CF, it loads whatever is inside the ebp register and pushes into the EAX register.  
+The ebp register is a two way pointer and linking between word document and equation editor.  
+The hacker changed the ebp register value to 48 bytes and then it was loaded to the EAX register.  
+![step 3-2](https://github.com/tingsama/hacking-p2/blob/main/step%203-2.png)  
+4. Overflow message  
+Let now take a look at the 48 bytes detail inside the overflowed register beginning at address: 0012F350.  
+From address 0012F350 to 0012F360 32 bytes are saving the hacker's mshta link and it can send a get request to this link and download the malicious software.  
+Address: 0012F370 first 12 bytes are ‘20’ which are saving shell code inside but we cannot see it in detail through ASCii reader.  
+The final 4 bytes are ‘12 0C 43 00’ which is the new EIP register address that the hacker wants us to jump to in the next step.  
+![step 4](https://github.com/tingsama/hacking-p2/blob/main/step%204.png)  
+5. Redirect to new EIP address  
+Here we can see at address: 00430C12 it call the Winexe program.  
+![step 5](https://github.com/tingsama/hacking-p2/blob/main/step%205.png)  
+6. Winexe execute   
+From the code here we can see the Winexe execute at address 00430C12 and talk to the EAX register as it input.  
+In this case, inside the Winexe it will run shell code first, then send a get request to the hacker's link.  
+![step 6](https://github.com/tingsama/hacking-p2/blob/main/step%206.png)  
+7. Download hacker’s malicious software   
+Finally after everything executes and runs correctly, it will download the malicious software and hide in some specific hard finding place to continuously steal your personal information.  
 
 
 ### How to avoid?
