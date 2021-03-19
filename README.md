@@ -65,7 +65,8 @@ On memory 004115CF, it loads whatever is inside the ebp register and pushes into
 The ebp register is a two way pointer and linking between word document and equation editor.  
 The hacker changed the ebp register value to 48 bytes and then it was loaded to the EAX register.  
 ![step 3-2](https://github.com/tingsama/hacking-p2/blob/main/step%203-2.png)  
-<p align="center"> Figure 6:  Debuger screenshot 2  [3] </p>  
+<p align="center"> Figure 6:  Debuger screenshot 2 [3] </p>  
+  
 #### 4. Overflow message  
 Let now take a look at the 48 bytes detail inside the overflowed register beginning at address: 0012F350.  
 From address 0012F350 to 0012F360 32 bytes are saving the hacker's mshta link and it can send a get request to this link and download the malicious software.  
@@ -90,7 +91,7 @@ Finally after everything executes and runs correctly, it will download the malic
 The best way to protect your machine from this vulnerability is patching.
 However, if you decide not to patch, a simple way to protect your machine is to disable EQUAEDT32.exe which is the equation editor that has the vulnerability.
 The following commands can update your registry to disable EQUAEDT32.exe.
-If you have an Office software running on a x64 machine, then you can use the second command, otherwise the first command is your choice. [4]
+If you have an Office software running on a x64 machine, then you can use the second command, otherwise the first command is your choice. [4]  
 ![Update Registry](https://github.com/tingsama/hacking-p2/blob/main/Update%20Registry.png)  
 <p align="center"> Figure 10: Update registry [4] </p>  
 
@@ -99,7 +100,7 @@ If you have an Office software running on a x64 machine, then you can use the se
 The official patching for CVE-2017-11882 was done in a Patch Tuesday update in November 2017. The patching was mainly done at function sub_0041160F.
 The difference of the patched function(left hand side) and the original function(right hand side) is shown below.
 The left top block shows that a boundary check is added. This line of code reset the counter register to 0x20 if it is larger than or equal to 0x21.
-The left bottom block added a buffer truncation. This code makes sure only 0x20 bytes are copied and zero-terminate. [5]
+The left bottom block added a buffer truncation. This code makes sure only 0x20 bytes are copied and zero-terminate. [5]  
 ![Official Patc](https://github.com/tingsama/hacking-p2/blob/main/Official%20Patch.png)  
 <p align="center"> Figure 11: Official Patch [5] </p>  
 
