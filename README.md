@@ -1,5 +1,5 @@
 # Microsoft Office Memory Corruption (CVE-2017-11882)  
-![Word Logo](https://github.com/tingsama/hacking-p2/blob/main/Word%20Logo.png)  
+<p align="center"><img src="https://github.com/tingsama/hacking-p2/blob/main/Word%20Logo.png"></p> 
 
 ### Background
 * __Age__: 17 year old vulnerability
