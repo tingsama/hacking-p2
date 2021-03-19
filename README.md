@@ -77,17 +77,6 @@ In this case, inside the Winexe it will run shell code first, then send a get re
 Finally after everything executes and runs correctly, it will download the malicious software and hide in some specific hard finding place to continuously steal your personal information.  
 
 
-### How to avoid?
-* Don’t skip patches.  
-Simply __patch__ or __update__ the software can prevent an attack from happening. 
-* Use a real-time anti-virus.  
-Using a __anti-virus software__ can sometime be helpful.
-* Filter your email.  
-__Block__ the type of document that you don't use.  
-__Do not click__ on the link or a document that looks suspicious. 
-* Keep track of your websites. 
-__Don’t enable online services__ or __create online accounts__ just because of promotion. 
-
 
 ### [How to protect yourself from this exploit](https://support.microsoft.com/en-us/topic/how-to-disable-equation-editor-3-0-7e000f58-cbf4-e805-b4b1-fde0243c9a92)
 The best way to protect your machine from this vulnerability is patching.  
@@ -103,5 +92,24 @@ The difference of the patched function(left hand side) and the original function
 The left top block shows that a boundary check is added. This line of code reset the counter register to 0x20 if it is larger than or equal to 0x21.  
 The left bottom block added a buffer truncation. This code makes sure only 0x20 bytes are copied and zero-terminate. [5]  
 ![Official Patc](https://github.com/tingsama/hacking-p2/blob/main/Official%20Patch.png)  
+
+### How to avoid attacks
+* Don’t skip patches.  
+Simply __patch__ or __update__ the software can prevent an attack from happening. 
+* Use a real-time anti-virus.  
+Using a __anti-virus software__ can sometime be helpful.
+* Filter your email.  
+__Block__ the type of document that you don't use.  
+__Do not click__ on the link or a document that looks suspicious. 
+* Keep track of your websites. 
+__Don’t enable online services__ or __create online accounts__ just because of promotion. 
+
+
+### Refereces
+[1]"NVD - CVE-2017-11882", Nvd.nist.gov, 2021. [Online]. Available: https://nvd.nist.gov/vuln/detail/CVE-2017-11882. [Accessed: 18- Mar- 2021].
+[2]Blogs.quickheal.com, 2021. [Online]. Available: https://blogs.quickheal.com/wp-content/uploads/2018/02/Fig3.png. [Accessed: 18- Mar- 2021].
+[3]C. Hardy, Stack Buffer Overflows - a primer on smashing the stack using CVE-2017-11882. 2021.
+[4]C. Hardy, CVE-2017-11882 - 3 ways to perform technical analysis, 1 easy way to protect. 2021.
+[5]L. Treiber, "Microsoft's Manual Binary Patch For CVE-2017-11882 Meets 0patch", Blog.0patch.com, 2021. [Online]. Available: https://blog.0patch.com/2017/11/official-patch-for-cve-2017-11882-meets.html. [Accessed: 18- Mar- 2021].
 
 
